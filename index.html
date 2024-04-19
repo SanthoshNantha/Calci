@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slacal Web Page</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            background-image: url('Dipo/pal.png');
+            background-repeat: no-repeat;
+            background-size: 1600px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px;
+        }
+
+        input[type="number"] {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        button {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Slacal Web Page</h1>
+        <div id="dayForm">
+            <!-- Create form for each day -->
+            <div id="day0">
+                <h3>Day 1</h3>
+                <label for="morning0">Morning hours:</label>
+                <input type="number" id="morning0" name="morning0" step="0.01">
+                <label for="evening0">Evening hours:</label>
+                <input type="number" id="evening0" name="evening0" step="0.01">
+            </div>
+            <!-- Repeat for each day -->
+            <div id="day1">
+                <h3>Day 2</h3>
+                <label for="morning1">Morning hours:</label>
+                <input type="number" id="morning1" name="morning1" step="0.01">
+                <label for="evening1">Evening hours:</label>
+                <input type="number" id="evening1" name="evening1" step="0.01">
+            </div>
+            <div id="day2">
+                <h3>Day 3</h3>
+                <label for="morning2">Morning hours:</label>
+                <input type="number" id="morning2" name="morning2" step="0.01">
+                <label for="evening2">Evening hours:</label>
+                <input type="number" id="evening2" name="evening2" step="0.01">
+            </div>
+            <div id="day3">
+                <h3>Day 4</h3>
+                <label for="morning3">Morning hours:</label>
+                <input type="number" id="morning3" name="morning3" step="0.01">
+                <label for="evening3">Evening hours:</label>
+                <input type="number" id="evening3" name="evening3" step="0.01">
+            </div>
+            <div id="day4">
+                <h3>Day 5</h3>
+                <label for="morning4">Morning hours:</label>
+                <input type="number" id="morning4" name="morning4" step="0.01">
+                <label for="evening4">Evening hours:</label>
+                <input type="number" id="evening4" name="evening4" step="0.01">
+            </div>
+            <div id="day5">
+                <h3>Day 6</h3>
+                <label for="morning5">Morning hours:</label>
+                <input type="number" id="morning5" name="morning5" step="0.01">
+                <label for="evening5">Evening hours:</label>
+                <input type="number" id="evening5" name="evening5" step="0.01">
+            </div>
+            <div id="day6">
+                <h3>Day 7</h3>
+                <label for="morning6">Morning hours:</label>
+                <input type="number" id="morning6" name="morning6" step="0.01">
+                <label for="evening6">Evening hours:</label>
+                <input type="number" id="evening6" name="evening6" step="0.01">
+            </div>
+        </div>
+        <button onclick="calculateResults()">Calculate</button>
+        <div class="result">
+            <p id="dayTotals"></p>
+            <p id="grandTotal"></p>
+            <p id="salary"></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code for calculation
+
+        function calculateResults() {
+            let grandTotal = 0;
+            let hourlyRate = parseFloat(prompt("Enter hourly rate:"));
+
+            // Array to store total hours for each day
+            let dayTotals = [];
+
+            // Iterate through each day
+            for (let i = 0; i < 7; i++) {
+                let morningHours = parseFloat(document.getElementById("morning" + i).value);
+                let eveningHours = parseFloat(document.getElementById("evening" + i).value);
+                let totalHours = morningHours + eveningHours;
+                
+                // Store total hours for each day
+                dayTotals[i] = totalHours;
+
+                // Display total hours for each day
+                document.getElementById("dayTotals").innerHTML += `Total hours for Day ${i + 1}: ${totalHours.toFixed(2)}<br>`;
+
+                // Add to grand total
+                grandTotal += totalHours;
+            }
+
+            // Display grand total hours
+            document.getElementById("grandTotal").innerHTML = `Grand total hours for all days: ${grandTotal.toFixed(2)}`;
+
+            // Calculate salary and display it
+            let salary = grandTotal * hourlyRate;
+            document.getElementById("salary").innerHTML = `Total salary: ${salary.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
